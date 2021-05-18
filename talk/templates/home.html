@@ -1,0 +1,126 @@
+{% extends 'basic.html' %}
+{% block title %}
+Blogpost
+{% endblock %}
+{% block body %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">D-talk</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
+</div>
+<div style="margin-left: 30px; margin-bottom: 15px; background-color:rgb(253, 166, 53);">
+    <div class='row' style="font-size:x-large; text-decoration:none; font-weight: bold;">
+        <div class='mr-sm-3'><a href="#" style="color: black;">Resent Question</a></div>
+        <div class='mr-sm-3'><a href="#" style="color: black;">Most Answered</a></div>
+        <div class='mr-sm-3'><a href="#" style="color: black;">Answer</a></div>
+        <div class='mr-sm-3'><a href="#" style="color: black;">No Answer</a></div>
+        <div class='mr-sm-3'><a href="#" style="color: black;">Most Visted</a></div>
+        <div class='mr-sm-3'><a href="#" style="color: black;">Recent Posts</a></div>
+    </div>
+</div>
+<aside class="col-md-3 sidebar sticky-sidebar "
+    style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px; float: right;">
+    <div class="theiaStickySidebar" style="padding-top: 0px; padding-bottom: 1px; position: static;">
+        <div class="widget_ask" style="background-color: rgb(253, 166, 53);"> <a a="" target="_self"
+                href="#" class="color button small margin_0" style="color: black; font-size: x-large; font-weight: bold;">Ask A Question</a></div>
+        <div id="stats-widget-2" class="widget stats-widget">
+            <h3 class="widget_title">Stats</h3>
+            <div class="widget_stats ul_list ul_list-icon-ok">
+                <ul>
+                    <li><i class="icon-question-sign"></i>Questions ( <span>19</span> )</li>
+                    <li><i class="icon-comment"></i>Answers ( <span>44</span> )</li>
+                    <li><i class="icon-asterisk"></i>Best Answers ( <span>4</span> )</li>
+                    <li><i class="icon-user"></i>Users ( <span>26</span> )</li>
+                </ul>
+            </div>
+        </div>
+        <div id="login-widget-2" class="widget login-widget">
+            <h3 class="widget_title">Login</h3>
+            <div class="widget_login">
+                <div class="form-style form-style-2">
+                    <div class="ask_form inputs">
+                        <form class="login-form ask_login" action="https://2code.info/demo/themes/ask-me/"
+                            method="post">
+                            <div class="ask_error"></div>
+                            <div class="form-inputs clearfix">
+                                <p class="login-text"> <input class="required-item" type="text" placeholder="Username"
+                                        name="log"> <i class="icon-user"></i></p>
+                                <p class="login-password"> <input class="required-item" type="password"
+                                        placeholder="Password" name="pwd"> <i class="icon-lock"></i> <a
+                                        href="#">Forget</a></p>
+                            </div>
+                            <p class="form-submit login-submit"> <span class="loader_2"></span> <input type="submit"
+                                    value="Log in" class="button color small login-submit submit sidebar_submit">
+                            </p>
+                            <div class="rememberme"> <label><input type="checkbox" input="" name="rememberme"
+                                        value="forever" checked="checked"> Remember Me</label></div> <input
+                                type="hidden" name="redirect_to" value="https://2code.info/demo/themes/ask-me/">
+                            <input type="hidden" name="login_nonce" value="cbe1090f30"> <input type="hidden"
+                                name="ajax_url" value="https://2code.info/demo/themes/ask-me/wp-admin/admin-ajax.php">
+                            <input type="hidden" name="form_type" value="ask-login">
+                            <div class="errorlogin"></div>
+                        </form>
+                    </div>
+                    <ul class="login-links login-links-r">
+                        <li><a href="#">Register</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div id="questions-widget-2" class="widget questions-widget">
+            <h3 class="widget_title">Recent Questions</h3>
+            <ul class="related-posts">
+                <li class="related-item">
+                    <div class="questions-div">
+                        <h3> <a href="https://2code.info/demo/themes/ask-me/question/do-i-need-to-have-a-undergrad-percentage-of-70-to-do-my-masters-in-germany/"
+                                title="Do I need to have a undergrad percentage of 70% to do my masters in Germany?"
+                                rel="bookmark"> Do I need to have </a></h3>
+                        <p>Participate in the referendum, Please.</p>
+                        <div class="clear"></div><span>November 19, 2017</span>
+                    </div>
+                </li>
+                <li class="related-item">
+                    <div class="questions-div">
+                        <h3> <a href="https://2code.info/demo/themes/ask-me/question/how-much-do-web-developers-earn-what-is-their-salary/"
+                                title="How much do web developers earn? What is their salary?" rel="bookmark"> How
+                                much do web developers </a></h3>
+                        <p>I am thinking of pursuing web developing as a career &amp; was ...</p>
+                        <div class="clear"></div><span>July 16, 2017</span>
+                    </div>
+                </li>
+                <li class="related-item">
+                    <div class="questions-div">
+                        <h3> <a href="https://2code.info/demo/themes/ask-me/question/dealing-with-an-employee-that-went-over-my-head/"
+                                title="Dealing with an employee that went over my head" rel="bookmark"> Dealing with
+                                an employee that </a></h3>
+                        <p>I manage a small team and recently hired for a new position. ...</p>
+                        <div class="clear"></div><span>July 16, 2017</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>
+<div class="container" style="margin-top: 1.5rem;">
+    {% for item in mypost %}
+    <div class="card w-75 " style="background-color: rgb(241, 228, 210); margin-bottom: 5px;">
+        <div class="card-body">
+            <!-- <h5 class="card-title">{{ item.head0 }}</h5>
+                <p class="card-text">{{ item.chead0}}</p> -->
+            <div class="col p-4 d-flex flex-column position-static">
+                <img class="rounded float-lef d-inline-block" style="display: block;" src="/media/{{item.thumbnail}}"
+                    width="100" height="100">
+                <h3 class="mb-0">{{item.title}}</h3>
+                <strong class="d-inline-block mb-2 text-primary">{{item.head0}}</strong>
+                <div class="mb-1 text-muted">{{ item.pub_date }}</div>
+                <p class="card-text mb-auto">{{item.head1}}</p>
+                <a href="/blogpost/{{ item.post_id }}" class="stretched-link">Continue reading</a>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
