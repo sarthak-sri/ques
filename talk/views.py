@@ -1,4 +1,3 @@
-from .models import Blogpost
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect , redirect
 from .models import Post, Comment, Category
 from .forms import NewCommentForm , Question
@@ -6,11 +5,6 @@ from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django.core.paginator import Paginator ,EmptyPage,PageNotAnInteger
-
-# Create your views here.
-# def home(request):
-#     p=Blogpost.objects.all()
-#     return render(request,'home.html',{'mypost':p})
 
 
 def d(request):
@@ -96,7 +90,6 @@ def question(request):
             subject = "Website Inquiry"
             body ={
                 'Name': form.changed_data['Name'],
-                'Email': form.changed_data['Email'],
                 'category': form.changed_data['category'],
                 'question': form.changed_data['question'],
             }

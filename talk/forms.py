@@ -16,10 +16,9 @@ class NewCommentForm(forms.ModelForm):
         
         class Meta:
             model = Comment
-            fields = ('name', 'parent','email', 'content')
+            fields = ('name', 'parent', 'content')
             widgets = {
                 'name': forms.TextInput(attrs={'class': 'col-sm-12'}),
-                'email': forms.TextInput(attrs={'class': 'col-sm-12'}),
                 'content': forms.Textarea(attrs={'class': 'form-control'}),
             }
         def save(self, *args, **kwargs):
@@ -28,6 +27,5 @@ class NewCommentForm(forms.ModelForm):
 
 class Question(forms.Form):
     Name = forms.CharField()
-    Email = forms.EmailField()
     category = forms.ChoiceField(choices=[('question','Question') ,('answer' , 'Answer')])
     question = forms.CharField(widget=forms.Textarea) 

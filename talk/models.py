@@ -62,7 +62,6 @@ class Comment(MPTTModel):
                              related_name='comments')
     parent = TreeForeignKey('self',on_delete=models.CASCADE,null = True , blank=True,related_name='children')
     name = models.CharField(max_length=50)
-    email = models.EmailField()
     content = models.TextField()
     publish = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=True)
@@ -74,18 +73,4 @@ class Comment(MPTTModel):
         return f'Comment by {self.name}'
 
 
-class Blogpost(models.Model):
-    post_id=models.AutoField(primary_key=True)
-    title=models.CharField(max_length=50,default='',help_text='enter title of blog')
-    head0=models.CharField(max_length=500,default='')
-    chead0=models.CharField(max_length=5000,default='')
-    head1=models.CharField(max_length=500,default='')
-    chead1=models.CharField(max_length=5000,default='')
-    head2=models.CharField(max_length=500,default='')
-    chead2=models.CharField(max_length=5000,default='')
-    pub_date=models.DateField(default=datetime.now,blank=True)
-    author=models.CharField(max_length=20,default='')
-    thumbnail=models.ImageField(upload_to='media',default='')
 
-    def __str__(self):
-        return self.title
