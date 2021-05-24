@@ -1,7 +1,8 @@
+from django.db.models.expressions import Value
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect , redirect
-from .models import Post, Comment, Category
+from .models import Post, Comment, Category , Like ,Album ,Contact
 from .forms import NewCommentForm , Question
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import message, send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django.core.paginator import Paginator ,EmptyPage,PageNotAnInteger
@@ -102,3 +103,47 @@ def question(request):
 
     form = Question()
     return render (request , 'h.html' , {'form':form})
+
+# like unlike code 
+
+def album(request):
+    qs=Album.objects.all()
+    user = request.user
+    context = {
+        'qs':qs,
+        'user':user
+    }
+    return render(request,'main.html',context)
+
+def like(request):
+    user = request.user
+    if request.method == 'POST':
+        album_id = request.POST.get('album_id')
+        album_obj = Album.objects.get(id=album_id)
+        if user in album_obj.liked.all():
+            album_obj.liked.remove(user)
+        else :
+            album_obj.liked.add(user)
+        like , created = Like.objects.get_or_create(user=user,post_id = album_id)
+
+        if not created:
+            if like.value == 'like':
+                like.value = 'unlike'
+            else:
+                like.value = 'like'
+        like.save()
+    return redirect('talk:album-list')
+
+#contact us
+
+def contact(request):
+    if request.method=="POST":
+        first_name=request.POST.get('first_name', '')
+        last_name=request.POST.get('last_name', '')
+        email=request.POST.get('email', '')
+        phone=request.POST.get('contact_no', '')
+        message=request.POST.get('message', '')
+        print(first_name,last_name,email,phone,message)
+        contact = Contact(first_name=first_name,last_name=last_name, email=email, phone=phone, message=message)
+        contact.save()
+    return render(request,"contact.html")
