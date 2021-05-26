@@ -44,9 +44,20 @@
         <div id="mid">
             <div class="container">
                 <div class="row justify-content-md-center">
-                    <div class="col-md-9">
+                    <div class="col-md-7">
                         <h1>Title : {{post.title}}</h1>
                     </div>
+                    {% if fav %}
+                    <div>
+                        <a href="{% url 'talk:favourite_list'%}" class='btn btn-outline-dark'>Remove favourites</a>
+                    </div>
+                    {% else %}
+                    <div>
+                        <div>
+                            <a href="{% url 'talk:favourite_add' post.id %}" class='btn btn-outline-dark'>Add to favourite</a>
+                        </div>
+                    </div>
+                    {% endif %}
                     <div class="col-md-9"><img class="card-img-top" src="{{post.image.url}}" alt="{{ post.title }}">
                     </div>
                 </div>

@@ -6,6 +6,7 @@ from django.core.mail import message, send_mail, BadHeaderError
 from django.http import HttpResponse
 from django.views.generic import ListView
 from django.core.paginator import Paginator ,EmptyPage,PageNotAnInteger
+from django.contrib.auth import login
 
 
 def d(request):
@@ -35,9 +36,15 @@ def post_single(request, post):
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect("/")
+
     
 
     post = get_object_or_404(Post, slug=post, status='published')
+
+    fav = bool
+    if post.favourites.filter(id=request.user.id).exists():
+        fav = True
+
 
     allcomments = post.comments.filter(status=True)
     page = request.GET.get('page', 1)
@@ -62,7 +69,7 @@ def post_single(request, post):
     else:
         comment_form = NewCommentForm()
     form = Question()
-    return render(request, 'd.html', {'post': post, 'comments':  user_comment, 'comments': comments, 'comment_form': comment_form,'form':form})
+    return render(request, 'd.html', {'post': post, 'comments':  user_comment, 'comments': comments, 'comment_form': comment_form,'form':form,'fav':fav })
 
 
 class CatListView(ListView):
@@ -147,3 +154,19 @@ def contact(request):
         contact = Contact(first_name=first_name,last_name=last_name, email=email, phone=phone, message=message)
         contact.save()
     return render(request,"contact.html")
+
+
+#favourites/Bookmark
+
+def favourite_add(request ,id):
+    post = get_object_or_404(Post,id=id)
+    if post.favourites.filter(id=request.user.id).exists():
+        post.favourites.remove(request.user)
+    else :
+        post.favourites.add(request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+
+def favourite_list(request):
+    new = Post.newmanager.filter(favourites = request.user)
+    return render(request,'favourites.html',{'new':new})
